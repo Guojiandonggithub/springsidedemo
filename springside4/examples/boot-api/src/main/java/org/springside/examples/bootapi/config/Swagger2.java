@@ -26,8 +26,8 @@ public class Swagger2 {
 
     private ApiInfo apiInfo() {
         return new ApiInfoBuilder()
-                .title("BOBO的API文档")
-                .contact(new Contact("BOBO", "http://localhost:8080/swagger/index.html", "1360851465@qq.com"))
+                .title("测试API文档")
+                .contact(new Contact("GJD", "http://localhost:8080/swagger/index.html", "1360851465@qq.com"))
                 .build();
     }
 }

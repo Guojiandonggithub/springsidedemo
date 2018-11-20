@@ -81,27 +81,21 @@ public class AccountService {
 		Account account = loginUsers.getIfPresent(token);
 
 		if (account == null) {
-			throw new ServiceException("User doesn't login", ErrorCode.UNAUTHORIZED);
+			throw new ServiceException("用户没登录", ErrorCode.UNAUTHORIZED);
 		}
 
 		return account;
 	}
 
 	@Transactional
-	public void register(String email, String name, String password) {
-
-		if (StringUtils.isBlank(email) || StringUtils.isBlank(password)) {
-			throw new ServiceException("Invalid parameter", ErrorCode.BAD_REQUEST);
-		}
-
-		Account account = new Account();
-		account.email = email;
-		account.name = name;
-		account.password = hashPassword(password);
-		accountDao.save(account);
+	public Account register(Account account) {
+		account.password = hashPassword(account.password);
+		return accountDao.save(account);
 	}
 
 	protected static String hashPassword(String password) {
 		return EncodeUtil.encodeBase64(HashUtil.sha1(password));
 	}
+
+
 }
